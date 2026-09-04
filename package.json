@@ -1,0 +1,33 @@
+{
+  "name": "rpgpashealth",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Guild Quest — RPG coopératif branché sur Google Fit et Fitbit",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "tsc -b --noEmit",
+    "test": "node --experimental-strip-types scripts/check-engine.ts",
+    "icons": "node scripts/make-icons.mjs",
+    "check": "npm run typecheck && npm run test",
+    "demo": "vite --config vite.demo.config.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vite-plugin-pwa": "^0.20.5"
+  }
+}

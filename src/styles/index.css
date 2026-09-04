@@ -1,0 +1,798 @@
+/* ==========================================================================
+   Guild Quest — feuille de style
+   Direction artistique : RPG 16 bits, fond nocturne, cadres dorés.
+   ========================================================================== */
+
+:root {
+  --bg: #120b26;
+  --bg-deep: #0b0619;
+  --panel: #1e1338;
+  --panel-raised: #2a1b4d;
+  --border: #4a3080;
+  --border-bright: #6b47b8;
+
+  --gold: #f2c14e;
+  --gold-dim: #a8842f;
+  --hp: #e5484d;
+  --xp: #4dd8e5;
+  --march: #6ee787;
+  --cardio: #ff8a5b;
+
+  --text: #ece7f8;
+  --muted: #a396c9;
+  --muted-dim: #6f639a;
+
+  --radius: 4px;
+  --pixel-font: 'Press Start 2P', 'Courier New', monospace;
+  --body-font: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 0%, #2a1b4d 0%, transparent 55%),
+    radial-gradient(circle at 85% 15%, #1f2f5c 0%, transparent 45%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--body-font);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Les sprites doivent rester nets : jamais de lissage. */
+img.pixel,
+.pixel img {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--pixel-font);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.75rem;
+}
+
+h1 {
+  font-size: 1.05rem;
+  color: var(--gold);
+}
+h2 {
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+h3 {
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+a {
+  color: var(--xp);
+}
+
+/* --------------------------------------------------------------------------
+   Mise en page
+   -------------------------------------------------------------------------- */
+
+.app-shell {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1rem 1rem 5.5rem;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0 1rem;
+}
+
+.app-header .brand {
+  font-family: var(--pixel-font);
+  font-size: 0.8rem;
+  color: var(--gold);
+  margin: 0;
+}
+
+.app-header .sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* Barre de navigation fixe en bas, façon appli mobile. */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, var(--bg-deep) 70%, transparent);
+  backdrop-filter: blur(6px);
+  border-top: 2px solid var(--border);
+  z-index: 20;
+}
+
+.nav-bar a {
+  flex: 1 1 0;
+  max-width: 92px;
+  text-align: center;
+  padding: 0.5rem 0.2rem;
+  font-family: var(--pixel-font);
+  font-size: 0.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: var(--radius);
+  border: 2px solid transparent;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.nav-bar a .icon {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+
+.nav-bar a:hover {
+  color: var(--text);
+}
+
+.nav-bar a.active {
+  color: var(--gold);
+  background: var(--panel-raised);
+  border-color: var(--border-bright);
+}
+
+/* --------------------------------------------------------------------------
+   Panneaux
+   -------------------------------------------------------------------------- */
+
+.panel {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  /* Liseré clair en haut, ombre portée en bas : relief 16 bits. */
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+    0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.panel.tight {
+  padding: 0.75rem;
+}
+
+.panel-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.panel-title h2 {
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Barres de progression
+   -------------------------------------------------------------------------- */
+
+.stat-bar {
+  margin-bottom: 0.75rem;
+}
+
+.stat-bar:last-child {
+  margin-bottom: 0;
+}
+
+.stat-bar .labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.72rem;
+  margin-bottom: 0.3rem;
+}
+
+.stat-bar .labels .name {
+  font-family: var(--pixel-font);
+  font-size: 0.55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.stat-bar .labels .value {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-bar .track {
+  height: 14px;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stat-bar .fill {
+  height: 100%;
+  transition: width 0.5s ease-out;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0 40%, transparent 40%);
+}
+
+.stat-bar .fill.hp {
+  background-color: var(--hp);
+}
+.stat-bar .fill.xp {
+  background-color: var(--xp);
+}
+.stat-bar .fill.march {
+  background-color: var(--march);
+}
+.stat-bar .fill.cardio {
+  background-color: var(--cardio);
+}
+.stat-bar .fill.gold {
+  background-color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Sprites
+   -------------------------------------------------------------------------- */
+
+.sprite {
+  image-rendering: pixelated;
+  display: block;
+}
+
+.sprite-frame {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 70%, var(--panel-raised) 0%, transparent 70%);
+  padding: 0.5rem;
+}
+
+/* Le compagnon se ternit et ralentit quand la guilde décroche. */
+.companion {
+  animation: float 3.5s ease-in-out infinite;
+}
+.companion.mood-thriving {
+  filter: drop-shadow(0 0 8px rgba(242, 193, 78, 0.55));
+}
+.companion.mood-healthy {
+  filter: none;
+}
+.companion.mood-weak {
+  filter: saturate(0.6) brightness(0.9);
+  animation-duration: 5s;
+}
+.companion.mood-sick {
+  filter: saturate(0.3) brightness(0.75);
+  animation-duration: 7s;
+}
+.companion.mood-dormant {
+  filter: grayscale(1) brightness(0.5);
+  animation: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.boss-sprite {
+  animation: menace 2.4s ease-in-out infinite;
+}
+
+@keyframes menace {
+  0%,
+  100% {
+    transform: translateX(0) scale(1);
+  }
+  50% {
+    transform: translateX(2px) scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .companion,
+  .boss-sprite,
+  .stat-bar .fill {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Formulaires et boutons
+   -------------------------------------------------------------------------- */
+
+label {
+  display: block;
+  font-family: var(--pixel-font);
+  font-size: 0.55rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.65rem 0.7rem;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  color: var(--text);
+  font-family: var(--body-font);
+  font-size: 0.95rem;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.field {
+  margin-bottom: 0.9rem;
+}
+
+.field .hint {
+  font-size: 0.75rem;
+  color: var(--muted-dim);
+  margin-top: 0.3rem;
+}
+
+button {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: var(--panel-raised);
+  color: var(--text);
+  border: 2px solid var(--border-bright);
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+  transition: transform 0.08s, background 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background-color: #352360;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: #1a1005;
+}
+
+button.primary:hover:not(:disabled) {
+  background-color: var(--gold);
+}
+
+button.ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+button.full {
+  width: 100%;
+}
+
+button.small {
+  font-size: 0.5rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.button-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Messages
+   -------------------------------------------------------------------------- */
+
+.alert {
+  padding: 0.7rem 0.85rem;
+  border-radius: 2px;
+  border-left: 4px solid;
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.alert.error {
+  background: rgba(229, 72, 77, 0.12);
+  border-color: var(--hp);
+  color: #ffc9cb;
+}
+
+.alert.success {
+  background: rgba(110, 231, 135, 0.12);
+  border-color: var(--march);
+  color: #c4f7d0;
+}
+
+.alert.info {
+  background: rgba(77, 216, 229, 0.1);
+  border-color: var(--xp);
+  color: #bdf0f5;
+}
+
+.alert.warning {
+  background: rgba(242, 193, 78, 0.12);
+  border-color: var(--gold);
+  color: #ffe6ac;
+}
+
+/* --------------------------------------------------------------------------
+   Listes et tableaux
+   -------------------------------------------------------------------------- */
+
+.roster {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roster-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+}
+
+.roster-row.self {
+  border-color: var(--gold);
+}
+
+.roster-row .rank {
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--gold);
+  width: 1.6rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.roster-row .who {
+  flex: 1;
+  min-width: 0;
+}
+
+.roster-row .who .name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roster-row .who .meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.roster-row .score {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--xp);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Grille de statistiques compacte. */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 0.5rem;
+}
+
+.stat-tile {
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  padding: 0.6rem 0.5rem;
+  text-align: center;
+}
+
+.stat-tile .value {
+  font-family: var(--pixel-font);
+  font-size: 0.8rem;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.35rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-tile .label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* --------------------------------------------------------------------------
+   Carte de campagne
+   -------------------------------------------------------------------------- */
+
+.region {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 0.6rem;
+  opacity: 0.55;
+}
+
+.region.reached {
+  opacity: 1;
+}
+
+.region.current {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px rgba(242, 193, 78, 0.3);
+}
+
+.region .marker {
+  width: 2.4rem;
+  height: 2.4rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 2px;
+  font-size: 1.3rem;
+  border: 2px solid var(--border);
+}
+
+.region .marker.plains {
+  background: #2f4a2b;
+}
+.region .marker.forest {
+  background: #1d3a26;
+}
+.region .marker.mountain {
+  background: #3d3a4d;
+}
+.region .marker.swamp {
+  background: #34401f;
+}
+.region .marker.tundra {
+  background: #2b4356;
+}
+.region .marker.volcano {
+  background: #4d2420;
+}
+
+.region .body {
+  flex: 1;
+  min-width: 0;
+}
+
+.region .body .name {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.region .body .flavor {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.45rem;
+}
+
+/* --------------------------------------------------------------------------
+   Sparkline d'activité
+   -------------------------------------------------------------------------- */
+
+.sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 60px;
+  padding-top: 0.25rem;
+}
+
+.sparkline .bar {
+  flex: 1;
+  min-height: 2px;
+  background: var(--border-bright);
+  border-radius: 1px 1px 0 0;
+  position: relative;
+}
+
+.sparkline .bar.goal-met {
+  background: var(--march);
+}
+
+.sparkline-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--muted-dim);
+  margin-top: 0.3rem;
+}
+
+/* --------------------------------------------------------------------------
+   Divers
+   -------------------------------------------------------------------------- */
+
+.center {
+  text-align: center;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.8rem;
+}
+
+.invite-code {
+  font-family: var(--pixel-font);
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  background: var(--bg-deep);
+  border: 2px dashed var(--gold-dim);
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: 2px;
+  user-select: all;
+}
+
+.class-picker {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.class-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--body-font);
+  font-size: 0.85rem;
+  color: var(--text);
+  box-shadow: none;
+}
+
+.class-option.selected {
+  border-color: var(--gold);
+  background: var(--panel-raised);
+}
+
+.class-option .info .name {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+
+.class-option .info .blurb {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.loading-screen {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  font-family: var(--pixel-font);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.auth-screen {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+}
+
+.auth-screen .hero {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-screen .hero h1 {
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+}
+
+.auth-screen .hero p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.auth-screen .party {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.provider-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: var(--bg-deep);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  margin-bottom: 0.6rem;
+}
+
+.provider-row.connected {
+  border-color: var(--march);
+}
+
+.provider-row .info .name {
+  font-family: var(--pixel-font);
+  font-size: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.provider-row .info .status {
+  font-size: 0.75rem;
+  color: var(--muted);
+}

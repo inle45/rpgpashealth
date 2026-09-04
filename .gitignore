@@ -1,0 +1,34 @@
+node_modules
+dist
+dist-demo
+dist-ssr
+*.local
+*.tsbuildinfo
+
+# Secrets — ne JAMAIS commiter
+.env
+.env.local
+.env.*.local
+supabase/.env
+supabase/.temp
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dev-dist
