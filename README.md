@@ -14,14 +14,17 @@ npm run demo     # voir le jeu immédiatement, avec des données factices
 
 ## Documentation
 
+**👉 Commence par [DEMARRAGE.md](docs/DEMARRAGE.md)** — tout se fait depuis le
+navigateur, rien à installer, et le jeu est en ligne après la première moitié.
+
+Les autres guides, si tu veux creuser :
+
 | Guide | Quand le lire |
 | --- | --- |
-| **[SETUP.md](docs/SETUP.md)** | L'installation complète, de zéro à la première partie |
-| **[OAUTH.md](docs/OAUTH.md)** | Brancher Google Fit et Fitbit — expliqué en détail, avec les erreurs classiques |
-| **[DEPLOY.md](docs/DEPLOY.md)** | Mettre en ligne sur Vercel, dans le bon ordre |
-
-Si tu ne lis qu'une chose : **[DEPLOY.md](docs/DEPLOY.md)** enchaîne les étapes
-dans l'ordre où il faut les faire et renvoie vers les autres au bon moment.
+| **[DEMARRAGE.md](docs/DEMARRAGE.md)** | La voie simple : navigateur uniquement, en deux temps |
+| **[OAUTH.md](docs/OAUTH.md)** | Comprendre OAuth, et le détail de chaque champ des consoles Google et Fitbit |
+| **[DEPLOY.md](docs/DEPLOY.md)** | Le déploiement Vercel en ligne de commande |
+| **[SETUP.md](docs/SETUP.md)** | L'installation complète avec les CLI (Supabase, Vercel) |
 
 ---
 

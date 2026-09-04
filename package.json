@@ -12,6 +12,7 @@
     "lint": "tsc -b --noEmit",
     "test": "node --experimental-strip-types scripts/check-engine.ts",
     "icons": "node scripts/make-icons.mjs",
+    "dashboard-files": "node scripts/build-dashboard-files.mjs",
     "check": "npm run typecheck && npm run test",
     "demo": "vite --config vite.demo.config.ts"
   },
