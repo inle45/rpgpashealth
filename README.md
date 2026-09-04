@@ -12,7 +12,16 @@ npm install
 npm run demo     # voir le jeu immédiatement, avec des données factices
 ```
 
-Pour brancher vos vraies données : **[docs/SETUP.md](docs/SETUP.md)**.
+## Documentation
+
+| Guide | Quand le lire |
+| --- | --- |
+| **[SETUP.md](docs/SETUP.md)** | L'installation complète, de zéro à la première partie |
+| **[OAUTH.md](docs/OAUTH.md)** | Brancher Google Fit et Fitbit — expliqué en détail, avec les erreurs classiques |
+| **[DEPLOY.md](docs/DEPLOY.md)** | Mettre en ligne sur Vercel, dans le bon ordre |
+
+Si tu ne lis qu'une chose : **[DEPLOY.md](docs/DEPLOY.md)** enchaîne les étapes
+dans l'ordre où il faut les faire et renvoie vers les autres au bon moment.
 
 ---
 

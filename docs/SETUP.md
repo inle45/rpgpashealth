@@ -43,6 +43,10 @@ Remplis maintenant les deux premières lignes de ton `.env`.
 
 ## 3. Google Fit
 
+> 📖 **Version détaillée : [OAUTH.md](OAUTH.md)** — avec l'explication du
+> fonctionnement, les captures de chaque champ à remplir et les erreurs
+> classiques. Ce qui suit en est le résumé.
+
 À faire si toi ou tes potes utilisez une montre Wear OS, un téléphone Android
 ou toute app qui remonte dans Google Fit.
 
@@ -71,6 +75,9 @@ ou toute app qui remonte dans Google Fit.
 > à partir de la FC max réglée dans le profil de chaque joueur.
 
 ## 4. Fitbit
+
+> 📖 **Version détaillée : [OAUTH.md](OAUTH.md), section 4** — notamment les
+> deux pièges Fitbit (une seule URL de callback par app, quota horaire).
 
 À faire si l'un de vous porte un bracelet ou une montre Fitbit.
 
@@ -131,29 +138,25 @@ supabase functions deploy daily-tick --no-verify-jwt
 
 ## 6. Déployer le front
 
-N'importe quel hébergeur statique fait l'affaire. Avec Vercel :
+> 📖 **Guide dédié : [DEPLOY.md](DEPLOY.md)** — les étapes dans l'ordre exact,
+> avec la dépendance circulaire à casser (Google veut l'URL de l'app, que tu ne
+> connais qu'après le premier déploiement).
+
+En résumé, avec Vercel :
 
 ```bash
 npm install -g vercel
-vercel
+vercel login
+vercel          # premier déploiement : donne l'URL
+# ... déclarer les variables VITE_* ...
+vercel --prod   # redéploiement pour les intégrer au bundle
 ```
 
-Déclare les variables `VITE_*` de ton `.env` dans les réglages du projet
-Vercel, puis redéploie. **Important** : les variables `VITE_*` sont intégrées
-au bundle au moment du build — un changement exige un nouveau build.
+`vercel.json` est déjà dans le repo : réécriture SPA et cache du service worker
+sont configurés, tu n'as rien à régler.
 
 Une fois le domaine connu, reviens ajouter l'URL de callback réelle dans les
 consoles Google et Fitbit (étapes 3.4 et 4.2), et mets `ALLOWED_ORIGIN` à jour.
-
-### Réécriture des routes
-
-L'app utilise des routes côté client. Sans configuration, un rafraîchissement
-sur `/boss` renverrait un 404. Vercel gère ça tout seul pour les SPA ; sur
-Netlify, ajoute un fichier `public/_redirects` :
-
-```
-/*  /index.html  200
-```
 
 ## 7. Le passage quotidien
 
